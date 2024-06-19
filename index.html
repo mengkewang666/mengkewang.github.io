@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+<style>
+ 
+    input::-webkit-input-placeholder {
+
+        color: #aab2bd;
+
+        font-size: 20px;
+    }
+    </style>
+    
+</head>
+<body>
+    <div class="landscape"></div>
+    <div class="filter"></div>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript" src="js/sky.js"></script>
+        <div class="barrageBox"></div>
+        <div class="barrageButton">
+            <input type="text" id="input" class="shurukuang" placeholder="请留下你的评价">
+            <button id="button" class="anniu">发送</button>
+        </div> 
+        <div class="content">
+            <div class="title">孟可旺</div>
+            <hr class="hr" />
+            <div class="discription">昨日看花<a class="red1">花灼灼</a>&emsp;今朝看花<a class="red1">花欲落</a></div>
+            <hr class="hr">
+            <nav class="cover-navigation cover-navigation--primary">
+                <ul class="navigation">
+                    <li class="navigation__item"><a href="" target="_blank" title="首页"onClick="return confirm('想p吃');">点击获取微信</a></li>
+                    <li class="navigation__item"><a href="" target="_blank" title="在线工具箱">扶贫按钮</a></li>
+                     <li class="navigation__item"><a href="" title=""onClick="return confirm('想p吃');">帅哥照片</a></li>
+                </ul>
+            </nav>
+            <div class="icp"><a href="http://www.beian.miit.gov.cn" class="icpnum" target="_blank"
+                rel="nofollow">软件工程系移动应用开发4班孟可旺学号32319500424</a></div>
+        </div>
+<script>
+
+let barrageList = ['干得漂亮','这么好的作业是谁做的呀！','6666666','我滴妈写出这网页的人一定也很帅吧','6666666','这也太帅了吧','无敌了啊','6666666','6666666','太逆天了','这期末作业妥妥满分啊','6666666','666666666666666',
+ '这样的作业肯定得拿满分呀！','我认为这个网页做的真不错','做得好','这样的老师一定给打满分吧', '你是最棒的','太厉害了吧也', '真的非常非常棒', '今晚打老虎', '佛曰：不可说', '已所不欲，勿施于人', '三人行，必有我师焉，择其善者而从之，其不善者而改之']
+        
+        let topList = [20, 40, 60, 80, 100, 120, 140, 160, 180, 200,250,300,350,400] 
+       
+        let num = Math.floor(Math.random() * 14) 
+       
+        let barrageBox = document.querySelector('.barrageBox')
+       
+        function createBarrage(barrageList) {
+            for (let index = 0; index < barrageList.length; index++) {
+                (function (index) {
+                    setTimeout(() => {
+                        let num = Math.floor(Math.random() * 10)
+                        let div = document.createElement('div')
+                        div.innerText = barrageList[index]
+                        div.classList.add('box')
+                        div.style.top = topList[num] + 'px'
+                        div.style.color = 'rgb(' + my_rgb() + ')' 
+                        barrageBox.appendChild(div)
+                    }, index * 1000);
+                })(index)
+            }
+        }
+       
+        createBarrage(barrageList)
+       
+       
+        var my_set = setInterval(() => {
+            barrageBox.innerHTML = ''
+            createBarrage(barrageList)
+        }, (barrageList.length + 10) * 1000);
+       
+
+        function my_rgb() {
+            let r = Math.floor(Math.random() * 256)
+            let g = Math.floor(Math.random() * 256)
+            let b = Math.floor(Math.random() * 256)
+            return r + ',' + g + ',' + b
+        }
+       
+        let button = document.getElementById('button')
+        let input = document.getElementById('input')
+       
+       
+        button.onclick = function () {
+            if (!input.value) return
+            barrageList.push(input.value)
+       
+            let num = Math.floor(Math.random() * 10)
+            let div = document.createElement('div')
+            div.innerText = input.value
+            div.classList.add('box')
+            div.style.top = topList[num] + 'px'
+       
+            div.style.border = '1px solid red'
+            div.style.borderRadius = 10 + 'px'
+            div.style.padding = '5px 10px'
+       
+            div.style.color = 'rgb(' + my_rgb() + ')' 
+            barrageBox.appendChild(div)
+            input.value = ''
+       
+            clearInterval(my_set)
+            
+            createBarrage(barrageList)
+            my_set = setInterval(() => {
+                barrageBox.innerHTML = ''
+                createBarrage(barrageList)
+            }, (barrageList.length + 10) * 1000);
+       
+        }
+</script>
+           
+</body>
+</html>
